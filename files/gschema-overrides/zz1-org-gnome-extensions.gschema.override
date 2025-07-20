@@ -1,0 +1,7 @@
+[org.gnome.shell]
+disable-user-extensions=false
+enabled-extensions=['AlphabeticalAppGrid@stuarthayhurst', 'appindicatorsupport@rgcjonas.gmail.com', 'logowidget@github.com.howbea', 'caffeine@patapon.info', 'dash-to-dock@micxgx.gmail.com', 'gnome-ui-tune@itstime.tech', 'blur-my-shell@aunetx', 'just-perfection-desktop@just-perfection', 'nothing-to-say@extensions.gnome.wouter.bolsterl.ee', 'steal-my-focus-window@steal-my-focus-window', 'tilingshell@ferrarodomenico.com']
+favorite-apps=['com.brave.Browser.desktop', 'app.zen_browser.zen.desktop', 'org.gnome.Nautilus.desktop', 'com.mitchellh.ghostty.desktop', 'wezterm.desktop', 'system-update.desktop', 'org.gnome.Boxes.desktop', 'virt-manager.desktop', 'com.vscodium.codium.desktop', 'com.discordapp.Discord.desktop']
+
+[org.gnome.shell.extensions.dash-to-dock]
+dock-position='LEFT'

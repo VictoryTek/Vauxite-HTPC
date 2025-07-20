@@ -1,0 +1,13 @@
+[org.gnome.desktop.interface]
+color-scheme='prefer-dark'
+accent-color='teal'
+
+[org.gnome.settings-daemon.plugins.power]
+sleep-inactive-ac-type='nothing'
+sleep-inactive-battery-type='nothing'
+
+[org.gnome.desktop.screensaver]
+lock-enabled=false
+
+#[org.gnome.login-screen]
+#logo='/usr/share/pixmaps/vauxite-gdm-logo.png'

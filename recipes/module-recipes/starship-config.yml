@@ -1,0 +1,6 @@
+---
+# yaml-language-server: $schema=https://schema.blue-build.org/module-v1.json
+modules:
+  - type: copy
+    src: "files/system/etc/skel/starship.toml"
+    dest: "/etc/skel/.config/starship.yml"

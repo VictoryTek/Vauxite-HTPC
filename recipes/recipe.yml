@@ -14,5 +14,10 @@ image-version: 42 # latest is also supported if you want new updates ASAP
 modules:
   - from-file: module-recipes/files.yml
   - from-file: module-recipes/default-flatpaks.yml
+  - from-file: module-recipes/gnome-extensions.yml
+  - from-file: module-recipes/icons.yml
+  - from-file: module-recipes/starship-config.yml
+  - from-file: module-recipes/wallpaper.yml
+  - from-file: module-recipes/gschema-overrides.yml
   - type: initramfs
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
