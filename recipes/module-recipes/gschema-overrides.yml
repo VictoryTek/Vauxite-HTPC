@@ -8,4 +8,4 @@ modules:
     - zz1-org-gnome-desktop-icons.gschema.override
     - zz1-org-gnome-desktop-interface.gschema.override
     - zz1-org-gnome-extensions.gschema.override
-    - zz1-org-gnome-login-screen.gschema.override
+    #- zz1-org-gnome-login-screen.gschema.override
