@@ -1,0 +1,42 @@
+---
+# yaml-language-server: $schema=https://schema.blue-build.org/module-v1.json
+type: default-flatpaks
+notify: true # Send notification after install/uninstall is finished (true/false)
+system:
+  # If no repo information is specified, Flathub will be used by default
+  install:
+    - org.audacityteam.Audacity           # Audacity
+    - com.bitwarden.desktop               # Bitwarden
+    - io.github.dvlv.boxbuddyrs           # BoxBuddy
+    - org.gnome.Boxes                     # Boxes
+    - com.brave.Browser                   # Brave Browser
+    - com.discordapp.Discord              # Discord
+    - com.mattjakeman.ExtensionManager    # Extension Manager
+    - com.github.tchx84.Flatseal          # FlatSeal
+    - io.freetubeapp.FreeTube             # FreeTube
+    - it.mijorus.gearlever                # Gearlever
+    - io.github.shiftey.Desktop           # Github Desktop
+    - org.gnome.TextEditor                # Gnome Text Editor
+    - org.gnome.Loupe                     # Image Viewer        
+    - io.missioncenter.MissionCenter      # Mission Center
+    - org.onlyoffice.desktopeditors       # Only Office
+    - dev.overlayed.Overlayed             # Overlayed
+    - org.freedesktop.Piper               # Piper
+    - org.prismlauncher.PrismLauncher     # Prism Launcher
+    - com.rustdesk.RustDesk               # Rustdesk        
+    - org.gnome.seahorse.Application      # Seahorse
+    - com.simplenote.Simplenote           # Simplenote
+    - dev.deedles.Trayscale               # Tray Scale
+    - com.github.unrud.VideoDownloader    # Video Downloader
+    - com.vscodium.codium                 # VS Codium
+    - io.github.flattool.Warehouse        # Warehouse
+    - app.zen_browser.zen                 # Zen Browser
+
+  remove:
+    - org.gnome.eog
+    - io.github.nokse22.Exhibit
+    - org.gnome.Weather
+    - org.gnome.clocks
+    - org.gnome.Characters
+
+user: {} # Also add Flathub user repo, but no user packages
