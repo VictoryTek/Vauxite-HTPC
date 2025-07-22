@@ -2,5 +2,5 @@
 # yaml-language-server: $schema=https://schema.blue-build.org/module-v1.json
 modules:
   - type: copy
-    src: "files/system/usr/share/vauxite/vauxite-htpc-dark.jxl"
+    src: "files/system/usr/share/vauxite-htpc/vauxite-htpc-dark.jxl"
     dest: "/usr/share/backgrounds/vauxite-htpc-dark.jxl"
