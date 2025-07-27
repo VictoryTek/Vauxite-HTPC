@@ -3,7 +3,7 @@
 modules:
   - type: gschema-overrides
     include:
-    - zz1-org-gnome-desktop-app-folders.gschema.override
+    #- zz1-org-gnome-desktop-app-folders.gschema.override
     - zz1-org-gnome-desktop-background.gschema.override
     - zz1-org-gnome-desktop-icons.gschema.override
     - zz1-org-gnome-desktop-interface.gschema.override
