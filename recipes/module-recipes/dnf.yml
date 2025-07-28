@@ -1,0 +1,39 @@
+---
+# yaml-language-server: $schema=https://schema.blue-build.org/module-v1.json
+modules:
+  - type: dnf
+    #source: ghcr.io/blue-build/modules/dnf:dnf-module
+    repos:
+      cleanup: false # clean up added repos after module is done
+      files:
+        - https://download.docker.com/linux/fedora/docker-ce.repo
+
+      copr:
+        - gloriouseggroll/nobara-42
+        - peterwu/rendezvous
+
+      # Put any repo GPG keys here
+
+#    remove:
+#      packages:  
+#        - waydroid
+
+
+    install:
+      packages:
+        # System Utilities
+        - blivet-gui
+        - inxi
+        - tailscale
+        - trayscale
+        - tmux
+
+        # GNOME & Theming
+        - bibata-cursor-themes                                 # peterwu/rendezvous
+        - gnome-tweaks
+
+        # Terminal & Shell Enhancements
+        - ghostty                                             # gloriouseggroll/nobara-42
+        - starship                                            # gloriouseggroll/nobara-42
+
+
