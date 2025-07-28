@@ -1,0 +1,12 @@
+NAME="Vauxite-HTPC"
+VERSION="42 (Based on Silverblue)"
+ID=silverblue
+ID_LIKE=fedora
+VERSION_ID=42
+PLATFORM_ID="platform:f42"
+PRETTY_NAME="Vauxite-HTPC Linux 42 (FROM Silverblue)"
+ANSI_COLOR="0;36"
+CPE_NAME="cpe:/o:universal-blue:vauxite-htpc:42"
+HOME_URL="https://github.com/VictoryTek/Vauxite-HTPC"
+SUPPORT_URL="https://github.com/VictoryTek/Vauxite-HTPC"
+BUG_REPORT_URL="https://github.com/VictoryTek/Vauxite-HTPC"
