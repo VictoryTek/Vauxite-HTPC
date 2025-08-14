@@ -15,8 +15,44 @@ WORKDIR="/tmp/pia-install"
 mkdir -p "$WORKDIR"
 cd "$WORKDIR"
 
-echo "[PIA] Downloading PIA .run installer: $PIA_RUN"
-curl -fsSL -o "$PIA_RUN" "${BASE_URL}/${PIA_RUN}" || { echo "[PIA] Download failed" >&2; exit 1; }
+UA="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36 BlueBuild-PIA-Install/1.0"
+REF="https://www.privateinternetaccess.com/"
+PIA_DOWNLOAD_URL_OVERRIDE="${PIA_DOWNLOAD_URL_OVERRIDE:-}"
+
+download_installer() {
+    local url="$1" out="$2"
+    echo "[PIA] Attempt download: $url"
+    # Use --retry for transient network issues, capture HTTP code for diagnostics
+    HTTP_CODE=$(curl -w "%{http_code}" -A "$UA" -H "Referer: $REF" --retry 5 --retry-delay 2 \
+        --retry-connrefused -fsSL -o "$out" "$url" 2>"$out.download.log" || true)
+    if [ "$HTTP_CODE" != "200" ]; then
+        echo "[PIA] Download failed (HTTP $HTTP_CODE) for $url" >&2
+        cat "$out.download.log" >&2 || true
+        rm -f "$out"
+        return 1
+    fi
+    return 0
+}
+
+if [ -n "$PIA_DOWNLOAD_URL_OVERRIDE" ]; then
+    echo "[PIA] Using override URL: $PIA_DOWNLOAD_URL_OVERRIDE"
+    if ! download_installer "$PIA_DOWNLOAD_URL_OVERRIDE" "$PIA_RUN"; then
+        echo "[PIA] Override URL download failed" >&2; exit 1; fi
+else
+    echo "[PIA] Downloading PIA .run installer: $PIA_RUN"
+    if ! download_installer "${BASE_URL}/${PIA_RUN}" "$PIA_RUN"; then
+        echo "[PIA] Primary versioned download failed; trying 'latest' fallback" >&2
+        LATEST_RUN="pia-linux-latest.run"
+        if download_installer "${BASE_URL}/${LATEST_RUN}" "$LATEST_RUN"; then
+            echo "[PIA] Fallback succeeded with latest; using $LATEST_RUN"
+            PIA_RUN="$LATEST_RUN"
+            PIA_VERSION="latest"
+        else
+            echo "[PIA] Fallback to latest failed" >&2
+            exit 1
+        fi
+    fi
+fi
 
 if [ -n "$PIA_SHA256" ]; then
     echo "[PIA] Verifying checksum"
@@ -24,13 +60,32 @@ if [ -n "$PIA_SHA256" ]; then
 fi
 
 chmod +x "$PIA_RUN"
-echo "[PIA] Running installer non-interactively"
-if ./$PIA_RUN --nox11 --accept >/dev/null 2>&1; then
+echo "[PIA] Preparing environment for non-interactive install"
+
+# Provide a stub systemctl to prevent failures when installer tries to start/enable services inside build container
+STUB_DIR="/tmp/pia-systemctl-stub"
+mkdir -p "$STUB_DIR"
+cat > "$STUB_DIR/systemctl" <<'EOF'
+#!/usr/bin/env bash
+echo "[systemctl stub] $@ (no-op during image build)"
+exit 0
+EOF
+chmod +x "$STUB_DIR/systemctl"
+export PATH="$STUB_DIR:$PATH"
+
+LOG_FILE="/var/log/pia-install.log"
+echo "[PIA] Running installer non-interactively (logging to $LOG_FILE)"
+if ./$PIA_RUN --nox11 --accept 2>&1 | tee "$LOG_FILE"; then
     INSTALLED_VIA="run"
 else
-    echo "[PIA] Installer failed" >&2
-    exit 1
+    STATUS=$?
+    echo "[PIA] Installer failed, tail of log:" >&2
+    tail -n 40 "$LOG_FILE" >&2 || true
+    exit $STATUS
 fi
+
+# Remove stub from PATH for subsequent steps (keep log)
+PATH="${PATH#${STUB_DIR}:}"
 
 # Post-install validation
 CLIENT_BIN="/opt/piavpn/bin/pia-client"

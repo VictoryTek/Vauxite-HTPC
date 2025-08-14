@@ -13,7 +13,7 @@ system:
     - org.gnome.Loupe                     # Image Viewer
     - io.gitlab.librewolf-community       # LibreWolf
     - io.missioncenter.MissionCenter      # Mission Center
-    - tv.plex.PlexHTPC                    # Plex HTPC
+    - tv.plex.PlexDesktop                 # Plex Desktop
     - com.rustdesk.RustDesk               # Rustdesk
     - org.gnome.seahorse.Application      # Seahorse
     - dev.deedles.Trayscale               # Tray Scale
