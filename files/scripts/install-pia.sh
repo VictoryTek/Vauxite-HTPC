@@ -4,8 +4,8 @@
 
 set -euo pipefail
 
-PIA_URL="https://installers.privateinternetaccess.com/download/pia-linux-3.5.2-06924.run"
-PIA_INSTALLER="pia-linux-3.5.2-06924.run"
+PIA_URL="https://installers.privateinternetaccess.com/download/pia-linux-3.6.2-08398.run"
+PIA_INSTALLER="pia-linux-3.6.2-08398.run"
 
 # Download the PIA installer
 if [ ! -f "$PIA_INSTALLER" ]; then
