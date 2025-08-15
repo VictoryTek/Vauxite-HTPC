@@ -23,6 +23,7 @@ modules:
       packages:
         # System Utilities
         - blivet-gui
+        - cockpit
         - inxi
         - tailscale
         - trayscale
